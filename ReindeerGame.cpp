@@ -1,3 +1,6 @@
+//Emily Garcia and Nicole Hipolito
+//November 10, 2015
+//Reindeer Game (Camel Game)
 #include <iostream>
 #include <iomanip>
 #include <cstdlib>
@@ -7,22 +10,84 @@
 
 using namespace std;
 
+// ********************************************************
 string userName();
-void menu(); //this calls the menu of the game.
-char userMovement(); //this function will ask the user for their desired move.
+//Summary: Gets the user's name.
+//Precondition: It greets the user then asks for his/her name.
+//Postcondition: Returns the user's name as a string.
+// ********************************************************
+void menu(); 
+//Summary: This calls the menu of the game.
+//Precondition: None.
+//Postcondition: Prints the choices the user can make.
+// ********************************************************
+char userMovement(); 
+//Summary: This function will help the user interact with the game.
+//Precondition: This will call the menu() function and then asks the user to pick a letter corresponding to their desired move.
+//Postcondition: Returns a char that'll determine what the user wants to do next.
+// ********************************************************
 void takeDrink (int& eggnog, int& thirsty);
-void fullSpeed (int& advancement, int& miles, int& thirsty, int& tiredness, int& elvesAdvance, int& elvesMiles); //this function will let the user move at full speed.
+// Summary: Resets the level of thirst and subtracts one from the eggnog.
+// Precondition: Two ints to be changed are passed by reference into the function.
+// Postcondition: The ints are changed and stored in their original reference variable.
+// ********************************************************
+void fullSpeed (int& advancement, int& miles, int& thirsty, int& tiredness, int& elvesAdvance, int& elvesMiles); 
+//Summary: This function will let the user move at full speed.
+//Precondition: Gets six ints; then a random generator will determine how much advancement and tiredness are going to be added.
+//Postcondition: If the user picks this move, it'll increase the reindeer's tiredness level, thirst, & its distance from the elves.
+// ********************************************************
 void modSpeed (int& advancement, int& miles, int& thirsty, int& tiredness, int& elvesAdvance, int& elvesMiles);
-void rest(int& tiredness, int& elvesAdvance); //this function will allow the user to let himself and the reindeer rest.
+// Summary: Changes all six of the int parameters to reflect the changes in status of after travelling at moderate speed.
+// Precondition: Six ints to be changed are passed by reference into the function.
+// Postcondition: Changes are made directly to reference variables.
+// ********************************************************
+void rest(int& tiredness, int& elvesAdvance);
+// Summary:this function will let the user and the reindeer rest.
+// Precondition: Gets the pass-by-reference of both the elves' advancement and the reindeer's tiredness level. 
+// Postcondition: Changes the tiredness level to zero and decreases the distance between the user and the elves.
+// ********************************************************
 void oasis (int& eggnog, int& thirsty, int& tiredness);
+// Summary: Changes all six of the int parameters to reflect the changes in status of after travelling at moderate speed.
+// Precondition: Six ints to be changed are passed by reference into the function.
+// Postcondition: Sum of the two int values is computed and stored in the reference variable.
+//
+// ********************************************************
 void statusCheck (int& miles, int& eggnog, int& elvesMiles);
+// Summary: Prints miles travelled, drinks left, and the number of miles the elves are behind.
+// Precondition: Six ints to be changed are passed by reference into the function.
+// Postcondition: Sum of the two int values is computed and stored in the reference variable.
+//
+// ********************************************************
 void checkThirst (int& thirsty, bool& end);
-void checkStamina(int tiredness, bool& end); //tiredness is a pass-by-value because you're not changing the tiredness level, you're just copying it in the function to check if the reindeer is tired.
-void checkDistance(int advancement, int elvesMiles, bool& end); //advancement and elvesMiles are pass-by-values because you're checking the distance between the elves and reindeer; NOT, trying to change either of them.
+//
+// ********************************************************
+void checkStamina(int tiredness, bool& end);
+// Summary: This will check if the reindeer is tired.
+// Precondition: Reads the reindeer's tiredness level as a pass-by-value to check if the reindeer is tired.
+// Postcondition: If the user is too tired, it will set the boolean to true to show that the reindeer died which in turn ends the game.
+//
+// ********************************************************
+void checkDistance(int advancement, int elvesMiles, bool& end); 
+// Summary: This will determine whether the user is about to lose or already lost the game.
+// Precondition: Reads the reindeer's advancement and elves' distance as pass-by-values to check the distance between the elves and reindeer.
+// Postcondition: If the elves are getting close, this function will warn the user; if the elves caught up, the user loses and sets the boolean to true to end the game.
+// ********************************************************
 void win(int advancement, bool& end);
+// Summary: Determines when the user wins.
+// Postcondition: Checks if the user ran more than 200 miles and reads the boolean as a pass-by-reference.
+// Postcondition: Sets the boolean to true which ends the while loop that makes the game go on.
+// ********************************************************
 void surpriseWin(bool& end);
+//
+// ********************************************************
 void krampusToTheRescuePsych(bool& end);
+//
+// ********************************************************
 void error(string user);
+// Summary: It tells the user that the game is having a malfunction
+// Precondition: Takes in the user's name
+// Postcondition: Mentions the user's name and prints out possible reasons why the error is occuring.
+// ********************************************************
 
 int main() 
 {
@@ -95,7 +160,7 @@ int main()
         
         checkDistance(milesTrav, milesElvesTrav, done);//if the elves have caught up, print that they caught the player and end the game.
         
-                    win(milesTrav, done);//You win
+        win(milesTrav, done);//You win
         
         surpriseWin(done);
         
@@ -252,7 +317,7 @@ void win(int advancement, bool& end)
     if (advancement > 200)
     {
         cout << "\nYou have outrun Santa's elves. You won!" << endl;
-        cout << "Make the best with that reindeer, son!" << endl;
+        cout << "Make the best with that reindeer, son!\n" << endl;
         end = true;
     }
 }
@@ -264,7 +329,7 @@ void surpriseWin (bool& end)
     if (randNum == 1)
     {
         cout << "You have found a wormhole and outrun Santa's elves!" << endl;
-        cout << "Keep the reindeer, conquer this world!" << endl;
+        cout << "Keep the reindeer, conquer this world!\n" << endl;
         end = true;
     }
 }
@@ -283,7 +348,7 @@ void oasis (int& eggnog, int& thirsty, int& tiredness)
         cout << "You have refilled your canteen, quenched your thirst, and rested your reindeer." << endl;
     }
 }
-//**************************************************************************************************************************************************void checkThirst (int& thirsty, bool& end)
+//**************************************************************************************************************************************************
 void checkThirst (int& thirsty, bool& end)
 {
     if ((thirsty >= 3) && (thirsty < 5))
